@@ -25,7 +25,7 @@ class RepositoryForm extends Component {
     }
 
     this.props.onRepositorySubmit({ author: author, repository: repository });
-    this.setState({ author: '', repository: '' });
+    // this.setState({ author: '', repository: '' });
   }
 
   render() {

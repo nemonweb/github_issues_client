@@ -2,59 +2,111 @@ import React, { Component } from 'react';
 import IssuesList from './IssuesList';
 import RepositoryForm from './RepositoryForm';
 import RepositoryName from './RepositoryName';
+import PageSize from './PageSize';
+import Pagination from 'rc-pagination';
 import './index.css';
+import './pagination.css';
 
 class IssuesBox extends Component {
   constructor(props, context) {
     super(props, context);
 
     this.state = {
-      data: []
+      data: [],
+      currentPage: 1,
+      pageSize: 10,
+      open_issues_count: 0,
+      repositoryAuthor: '',
+      repositoryName: ''
     }
   };
 
-  handleRepositorySubmit = repository => {
-    let httpRequest2 = new XMLHttpRequest();
-    httpRequest2.onreadystatechange = () => {
-      if (httpRequest2.readyState === 4) {
-        if (httpRequest2.status === 200) {
-          const response = JSON.parse(httpRequest2.responseText);
-          this.setState({ open_issues_count: response.open_issues_count });
-        } else {
-          console.error(this.props.url, httpRequest2.status, httpRequest2.responseText);
-        }
-      }
-    };
+  baseUrl = 'https://api.github.com/repos';
 
-    const url2 = `https://api.github.com/repos/${repository.author}/${repository.repository}`
-    httpRequest2.open('GET', url2, true);
-    httpRequest2.send();
-
-
-    // get issues
+  loadIssuesFromServer = () => {
+    if (this.state.repositoryAuthor === '' || this.state.repositoryName === '') {
+      return;
+    }
     let httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = () => {
       if (httpRequest.readyState === 4) {
         if (httpRequest.status === 200) {
           const response = JSON.parse(httpRequest.responseText);
-          this.setState({ data: response, author: repository.author, repository: repository.repository });
+          this.setState({ data: response });
+        } else {
+          console.error(this.props.url, httpRequest.status, httpRequest.responseText);
+        }
+      }
+    }
+    const url = `${this.baseUrl}/${this.state.repositoryAuthor}/${this.state.repositoryName}/issues?page=${this.state.currentPage}&per_page=${this.state.pageSize}`
+    httpRequest.open('GET', url, true);
+    httpRequest.send();
+  };
+
+  loadTotalIssuesFromServer = () => {
+    if (this.state.repositoryAuthor === '' || this.state.repositoryName === '') {
+      return;
+    }
+    let httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = () => {
+      if (httpRequest.readyState === 4) {
+        if (httpRequest.status === 200) {
+          const response = JSON.parse(httpRequest.responseText);
+          this.setState({ open_issues_count: response.open_issues_count });
         } else {
           console.error(this.props.url, httpRequest.status, httpRequest.responseText);
         }
       }
     };
 
-    const url = `https://api.github.com/repos/${repository.author}/${repository.repository}/issues?page=1&per_page=2`
+    const url = `${this.baseUrl}/${this.state.repositoryAuthor}/${this.state.repositoryName}`
     httpRequest.open('GET', url, true);
     httpRequest.send();
+  }
+
+  handleRepositorySubmit = repository => {
+    this.setState({ repositoryAuthor: repository.author, repositoryName: repository.repository }, () => {
+      this.loadIssuesFromServer();
+      this.loadTotalIssuesFromServer();
+    });
   };
 
+
+  handleChangePage = page => {
+    this.setState({ currentPage: page }, () => {
+      this.loadIssuesFromServer();
+      this.loadTotalIssuesFromServer();
+    });
+  }
+
+  handlePageSizeSubmit = pageSize => {
+    this.setState({ pageSize: pageSize.size }, () => {
+      this.loadIssuesFromServer();
+      this.loadTotalIssuesFromServer();
+    });
+  }
+
   render() {
+    let pagination;
+    if (this.state.open_issues_count && this.state.open_issues_count > this.state.pageSize){
+      pagination = <Pagination
+        onChange={this.handleChangePage}
+        current={this.state.currentPage}
+        total={this.state.open_issues_count}
+        pageSize={this.state.pageSize} />
+    }
+
     return (
       <div className='IssuesBox'>
         <RepositoryForm onRepositorySubmit={this.handleRepositorySubmit}/>
-        <RepositoryName author={this.state.author} repository={this.state.repository} />
+        <RepositoryName author={this.state.repositoryAuthor} repository={this.state.repositoryName} />
+        <PageSize onPageSizeSubmit={this.handlePageSizeSubmit}/>
         <IssuesList data={this.state.data} open_issues_count={this.state.open_issues_count} />
+        <div className="container">
+          { pagination }
+        </div>
+        
+
       </div>
     );
   }

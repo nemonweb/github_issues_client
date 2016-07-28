@@ -1,0 +1,21 @@
+.IssuesList-header {
+  margin-top: 20px;
+  background-color: #f8f8f8;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px 3px 0 0;
+  display: flex;
+}
+
+.IssuesList-issues-count {
+  padding-top: 13px;
+  padding-bottom: 13px;
+  padding-left: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #222;
+  font-weight: 600;
+}
+
+.IssuesList-nodes {
+  border: 1px #e5e5e5 solid;
+}

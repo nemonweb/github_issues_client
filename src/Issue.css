@@ -1,0 +1,29 @@
+.issue {
+  padding: 12px;
+  line-height: 1.25;
+  /*background-color: #f5f5f5;*/
+  border-top: 1px solid #eee;
+}
+
+.issue:hover {
+  background-color: #f5f5f5;
+}
+
+.issueTitle {
+  color: #333;
+  word-break: break-word;
+  font-size: 16px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.issueTitle:hover {
+  color: #4078c0;
+}
+
+.issueInfo {
+  color: #767676;
+  line-height: 1.25;
+  font-size: 12px;
+  margin-top: 3px;
+}

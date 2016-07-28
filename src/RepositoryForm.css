@@ -1,0 +1,40 @@
+.repositoryForm {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.repositoryForm-input{
+  padding-right: 8px;
+  padding-left: 8px;
+  font-size: 12px;
+  color: #767676;
+  white-space: nowrap;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
+}
+
+.repositoryForm-input--left{
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.repositoryForm-input--right{
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.repositoryForm-find{
+  color: #555;
+  background-color: #eee;
+  border: 1px solid #d5d5d5;
+  border-radius: 3px;
+  margin-left: 10px;
+}
+
+.repositoryForm-find:hover{
+  background-color: #ddd;
+  border-color: #ccc;
+}

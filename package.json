@@ -10,6 +10,7 @@
     "react": "^15.2.1",
     "react-addons-css-transition-group": "^15.2.1",
     "react-alert": "^1.0.14",
+    "react-autocomplete": "^1.0.1",
     "react-dom": "^15.2.1",
     "react-loader": "^2.4.0",
     "react-toastr": "^2.7.0"

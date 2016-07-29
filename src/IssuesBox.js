@@ -47,7 +47,6 @@ class IssuesBox extends Component {
           const response = JSON.parse(httpRequest.responseText);
           this.setState({ data: response, loaded: true });
         } else {
-          // console.error(this.props.url, httpRequest.status, httpRequest.responseText);
           this.msg.error(httpRequest.statusText, {
             time: 2000,
             type: 'error',
@@ -71,7 +70,10 @@ class IssuesBox extends Component {
           const response = JSON.parse(httpRequest.responseText);
           this.setState({ open_issues_count: response.open_issues_count });
         } else {
-          console.error(this.props.url, httpRequest.status, httpRequest.responseText);
+          this.msg.error(httpRequest.statusText, {
+            time: 2000,
+            type: 'error',
+          });
         }
       }
     };

@@ -1,10 +1,8 @@
 .rc-pagination {
   font-size: 12px;
-  font-family: 'Arial';
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  user-select: none;
+  display: table;
+  margin: 10px auto;
 }
 .rc-pagination-total-text {
   float: left;

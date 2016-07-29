@@ -117,10 +117,10 @@ class IssuesBox extends Component {
 
     return (
       <div className='IssuesBox'>
-        <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
+        <AlertContainer ref={a => { this.msg = a; return a; }} {...this.alertOptions} />
         <RepositoryForm onRepositorySubmit={this.handleRepositorySubmit}/>
         <RepositoryName author={this.state.repositoryAuthor} repository={this.state.repositoryName} />
-        <PageSize onPageSizeSubmit={this.handlePageSizeSubmit}/>
+        <PageSize open_issues_count={this.state.open_issues_count} onPageSizeSubmit={this.handlePageSizeSubmit}/>
         <Loader loaded={this.state.loaded}>
           <IssuesList data={this.state.data} open_issues_count={this.state.open_issues_count} />
         </Loader>

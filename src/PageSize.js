@@ -24,23 +24,27 @@ class PageSize extends Component {
   }
 
   render() {
-    return (
-      <div className='pageSizeForm'>
-        <div className="container">
-          <form onSubmit={this.handleSubmit}>
-            <label className="pageSizeForm-label">Кол-во issues на странице</label>
-            <div>
-              <input type='number' placeholder='Кол-во issues на странице'
-                className="pageSizeForm-input"
-                value={this.state.pageSize}
-                onChange={this.handlePageSizeChange}
-                />
-              <input type="submit" value="Save" className="pageSizeForm-save" />
-            </div>
-          </form>
+    if(this.props.open_issues_count > 0) {
+      return (
+        <div className='pageSizeForm'>
+          <div className="container">
+            <form onSubmit={this.handleSubmit}>
+              <label className="pageSizeForm-label">Кол-во issues на странице</label>
+              <div>
+                <input type='number' placeholder='Кол-во issues на странице'
+                  className="pageSizeForm-input"
+                  value={this.state.pageSize}
+                  onChange={this.handlePageSizeChange}
+                  />
+                <input type="submit" value="Save" className="pageSizeForm-save" />
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return <div></div>;
+    }
   }
 }
 

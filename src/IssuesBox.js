@@ -7,6 +7,8 @@ import Pagination from 'rc-pagination';
 import './index.css';
 import './pagination.css';
 
+import AlertContainer from 'react-alert';
+
 class IssuesBox extends Component {
   constructor(props, context) {
     super(props, context);
@@ -19,6 +21,14 @@ class IssuesBox extends Component {
       repositoryAuthor: '',
       repositoryName: ''
     }
+
+    this.alertOptions = {
+      offset: 14,
+      position: 'top right',
+      theme: 'dark',
+      time: 5000,
+      transition: 'scale'
+    };
   };
 
   baseUrl = 'https://api.github.com/repos';
@@ -34,7 +44,11 @@ class IssuesBox extends Component {
           const response = JSON.parse(httpRequest.responseText);
           this.setState({ data: response });
         } else {
-          console.error(this.props.url, httpRequest.status, httpRequest.responseText);
+          // console.error(this.props.url, httpRequest.status, httpRequest.responseText);
+          this.msg.error(httpRequest.statusText, {
+            time: 2000,
+            type: 'error',
+          });
         }
       }
     }
@@ -98,6 +112,7 @@ class IssuesBox extends Component {
 
     return (
       <div className='IssuesBox'>
+        <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
         <RepositoryForm onRepositorySubmit={this.handleRepositorySubmit}/>
         <RepositoryName author={this.state.repositoryAuthor} repository={this.state.repositoryName} />
         <PageSize onPageSizeSubmit={this.handlePageSizeSubmit}/>
@@ -105,7 +120,7 @@ class IssuesBox extends Component {
         <div className="container">
           { pagination }
         </div>
-        
+
 
       </div>
     );

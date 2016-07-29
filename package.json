@@ -8,7 +8,10 @@
   "dependencies": {
     "rc-pagination": "^1.5.3",
     "react": "^15.2.1",
-    "react-dom": "^15.2.1"
+    "react-addons-css-transition-group": "^15.2.1",
+    "react-alert": "^1.0.14",
+    "react-dom": "^15.2.1",
+    "react-toastr": "^2.7.0"
   },
   "scripts": {
     "start": "react-scripts start",

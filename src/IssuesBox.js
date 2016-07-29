@@ -3,9 +3,11 @@ import IssuesList from './IssuesList';
 import RepositoryForm from './RepositoryForm';
 import RepositoryName from './RepositoryName';
 import PageSize from './PageSize';
+import Loader from 'react-loader';
 import Pagination from 'rc-pagination';
-import './index.css';
 import './pagination.css';
+import './index.css';
+
 
 import AlertContainer from 'react-alert';
 
@@ -14,6 +16,7 @@ class IssuesBox extends Component {
     super(props, context);
 
     this.state = {
+      loaded: true,
       data: [],
       currentPage: 1,
       pageSize: 10,
@@ -42,7 +45,7 @@ class IssuesBox extends Component {
       if (httpRequest.readyState === 4) {
         if (httpRequest.status === 200) {
           const response = JSON.parse(httpRequest.responseText);
-          this.setState({ data: response });
+          this.setState({ data: response, loaded: true });
         } else {
           // console.error(this.props.url, httpRequest.status, httpRequest.responseText);
           this.msg.error(httpRequest.statusText, {
@@ -79,7 +82,7 @@ class IssuesBox extends Component {
   }
 
   handleRepositorySubmit = repository => {
-    this.setState({ repositoryAuthor: repository.author, repositoryName: repository.repository }, () => {
+    this.setState({ repositoryAuthor: repository.author, repositoryName: repository.repository, loaded: false }, () => {
       this.loadIssuesFromServer();
       this.loadTotalIssuesFromServer();
     });
@@ -87,14 +90,14 @@ class IssuesBox extends Component {
 
 
   handleChangePage = page => {
-    this.setState({ currentPage: page }, () => {
+    this.setState({ currentPage: page, loaded: false }, () => {
       this.loadIssuesFromServer();
       this.loadTotalIssuesFromServer();
     });
   }
 
   handlePageSizeSubmit = pageSize => {
-    this.setState({ pageSize: pageSize.size }, () => {
+    this.setState({ pageSize: pageSize.size, loaded: false }, () => {
       this.loadIssuesFromServer();
       this.loadTotalIssuesFromServer();
     });
@@ -116,7 +119,9 @@ class IssuesBox extends Component {
         <RepositoryForm onRepositorySubmit={this.handleRepositorySubmit}/>
         <RepositoryName author={this.state.repositoryAuthor} repository={this.state.repositoryName} />
         <PageSize onPageSizeSubmit={this.handlePageSizeSubmit}/>
-        <IssuesList data={this.state.data} open_issues_count={this.state.open_issues_count} />
+        <Loader loaded={this.state.loaded}>
+          <IssuesList data={this.state.data} open_issues_count={this.state.open_issues_count} />
+        </Loader>
         <div className="container">
           { pagination }
         </div>

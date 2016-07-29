@@ -1,22 +1,22 @@
-.RepositoryName {
+.repository_name {
   border-bottom: 1px solid #eee;
   padding-top: 20px;
   padding-bottom: 20px;
   background-color: #fafafa;
 }
 
-.RepositoryName-repository-name {
+.repository_name__text {
   font-size: 18px;
   line-height: 26px;
   color: #4078c0;
   text-decoration: none;
 }
 
-.RepositoryName-repository-name:hover {
+.repository_name__text:hover {
   text-decoration: underline;
 }
 
-.RepositoryName-divider {
+.repository_name__divider {
   font-size: 18px;
   line-height: 26px;
   color: #666;

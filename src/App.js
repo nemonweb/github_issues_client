@@ -7,11 +7,9 @@ import Loader from 'react-loader';
 import Pagination from 'rc-pagination';
 import './pagination.css';
 import './index.css';
-
-
 import AlertContainer from 'react-alert';
 
-class IssuesBox extends Component {
+export default class App extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -117,7 +115,7 @@ class IssuesBox extends Component {
 
     return (
       <div className='IssuesBox'>
-        <AlertContainer ref={a => { this.msg = a; return a; }} {...this.alertOptions} />
+        <AlertContainer ref={a => { this.msg = a; return a; } } {...this.alertOptions} />
         <RepositoryForm onRepositorySubmit={this.handleRepositorySubmit}/>
         <RepositoryName author={this.state.repositoryAuthor} repository={this.state.repositoryName} />
         <PageSize open_issues_count={this.state.open_issues_count} onPageSizeSubmit={this.handlePageSizeSubmit}/>
@@ -133,5 +131,3 @@ class IssuesBox extends Component {
     );
   }
 }
-
-export default IssuesBox;

@@ -1,20 +1,26 @@
 import React, { Component } from 'react';
 import './RepositoryForm.css';
-import Autocomplete from 'react-autocomplete'
+import Autocomplete from 'react-autocomplete';
+import AlertContainer from 'react-alert';
 
-class RepositoryForm extends Component {
+export default class RepositoryForm extends Component {
   constructor(props, context) {
     super(props, context);
 
     this.state = { author: '', repository: '', repos: [] }
+
+
+    this.alertOptions = {
+      offset: 14,
+      position: 'top right',
+      theme: 'dark',
+      time: 5000,
+      transition: 'scale'
+    };
   }
 
   handleAuthorChange = e => {
     this.setState({ author: e.target.value })
-  };
-
-  handleRepositoryChange = e => {
-    this.setState({ repository: e.target.value })
   };
 
   handleReposAuthorOnBlur = () => {
@@ -28,7 +34,10 @@ class RepositoryForm extends Component {
           const response = JSON.parse(httpRequest.responseText);
           this.setState({ repos: response });
         } else {
-          console.error(this.props.url, httpRequest.status, httpRequest.responseText);
+          this.msg.error('Пользователь не найден', {
+            time: 2000,
+            type: 'error',
+          });
         }
       }
     };
@@ -65,19 +74,21 @@ class RepositoryForm extends Component {
 
   render() {
     return (
-      <div className='repositoryForm'>
+      <div className='repository-form'>
+      <AlertContainer ref={a => { this.msg = a; return a; } } {...this.alertOptions} />
         <div className="container">
+
           <form onSubmit={this.handleSubmit}>
+            <span className='repository-form__label'>Issues</span>
             <input type='text' placeholder='User name'
-              className="repositoryForm-input repositoryForm-input--left"
+              className="repository-form__input repository-form__input_left"
               value={this.state.author}
               onChange={this.handleAuthorChange}
               onBlur={this.handleReposAuthorOnBlur}
               />
             <Autocomplete
-              className="repositoryForm-input repositoryForm-input--right"
               value={this.state.repository}
-              inputProps={{ placeholder: "Repository name", id: "repos-autocomplete" }}
+              inputProps={{ placeholder: "Repository name", id: "repos-autocomplete", className: 'repository-form__input repository-form__input_right' }}
               items={this.state.repos}
               getItemValue={(item) => item.name}
               shouldItemRender={this.matchReposToTerm}
@@ -86,7 +97,7 @@ class RepositoryForm extends Component {
               onSelect={this.handleAutocompleteSelect}
               renderItem={(item, isHighlighted) => (
                 <div
-                  className={isHighlighted ? 'repositoryForm-autocomplete-highlightedItem' : 'repositoryForm-autocomplete-item' }
+                  className={isHighlighted ? 'repository-form__highlighted-item' : 'repository-form__autocomplete-item' }
                   key={item.id}
                 >{item.name}</div>
               ) }
@@ -97,5 +108,3 @@ class RepositoryForm extends Component {
     );
   }
 }
-
-export default RepositoryForm;

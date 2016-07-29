@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Issue from './Issue';
 import './IssuesList.css';
 
-class IssuesList extends Component {
+export default class IssuesList extends Component {
   render() {
     const issueNodes = this.props.data.map( issue => {
       return (
@@ -18,15 +18,15 @@ class IssuesList extends Component {
 
     if (issueNodes.length > 0) {
       return (
-        <div className="IssuesList">
+        <div className="issues-list">
           <div className="container">
-            <div className="IssuesList-header">
-              <span className="IssuesList-issues-count">
+            <div className="issues-list__header">
+              <span className="issues-list__issues-count">
                 {this.props.open_issues_count} Open
               </span>
             </div>
 
-            <div className="IssuesList-nodes">
+            <div className="issues-list__nodes">
               {issueNodes}
             </div>
           </div>
@@ -37,5 +37,3 @@ class IssuesList extends Component {
     }
   }
 }
-
-export default IssuesList;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './RepositoryName.css';
 
-class RepositoryName extends Component {
+export default class RepositoryName extends Component {
   repositoryUrl() {
     return `https://github.com/${this.props.author}/${this.props.repository}`;
   }
@@ -11,15 +11,15 @@ class RepositoryName extends Component {
   render() {
     if (this.props.author) {
       return (
-        <div className="RepositoryName">
+        <div className="repository_name">
           <div className="container">
-            <a className="RepositoryName-repository-name" href={this.authorUrl()}>
+            <a className="repository_name__text" href={this.authorUrl()}>
               {this.props.author}
             </a>
 
-            <span className="RepositoryName-divider">/</span>
+            <span className="repository_name__divider">/</span>
 
-            <a className="RepositoryName-repository-name" href={this.repositoryUrl()}>
+            <a className="repository_name__text" href={this.repositoryUrl()}>
               {this.props.repository}
             </a>
           </div>
@@ -30,5 +30,3 @@ class RepositoryName extends Component {
     }
   }
 }
-
-export default RepositoryName;

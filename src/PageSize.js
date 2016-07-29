@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './PageSize.css';
 
-class PageSize extends Component {
+export default class PageSize extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -26,17 +26,17 @@ class PageSize extends Component {
   render() {
     if(this.props.open_issues_count > 0) {
       return (
-        <div className='pageSizeForm'>
+        <div className='page-size-form'>
           <div className="container">
             <form onSubmit={this.handleSubmit}>
-              <label className="pageSizeForm-label">Кол-во issues на странице</label>
+              <label className="page-size-form__label">Кол-во issues на странице</label>
               <div>
                 <input type='number' placeholder='Кол-во issues на странице'
-                  className="pageSizeForm-input"
+                  className="page-size-form__input"
                   value={this.state.pageSize}
                   onChange={this.handlePageSizeChange}
                   />
-                <input type="submit" value="Save" className="pageSizeForm-save" />
+                <input type="submit" value="Save" className="page-size-form__save" />
               </div>
             </form>
           </div>
@@ -47,5 +47,3 @@ class PageSize extends Component {
     }
   }
 }
-
-export default PageSize;

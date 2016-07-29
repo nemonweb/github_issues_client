@@ -1,42 +1,32 @@
-.pageSizeForm {
-  padding-top: 10px;
-  padding-bottom: 10px;
+.page-size-form {
+  padding: 10px 0;
+  line-height: 20px;
 }
 
-.pageSizeForm-input{
+.page-size-form__input{
   width: 320px;
-  padding-left: 30px;
-  color: #767676;
-  border-color: #d5d5d5;
-  background-color: #fafafa;
-  min-height: 20px;
   padding: 6px 8px;
-  font-size: 14px;
-  line-height: 20px;
+  margin: 10px 20px 0 0;
+
   border: 1px solid #ddd;
   border-radius: 3px;
-  outline: none;
+  border-color: #d5d5d5;
+
+  color: #767676;
+  background-color: #fafafa;
+  min-height: 20px;
+
   box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
-  margin-top: 10px;
-  margin-right: 20px;
 }
 
-.pageSizeForm-save{
+.page-size-form__save{
   padding: 6px 14px;
   font-weight: 600;
-  line-height: 20px;
-  color: #666;
   border: 1px solid #e5e5e5;
   background-color: transparent;
   border-radius: 3px;
 }
 
-.pageSizeForm-save:hover{
+.page-size-form__save:hover{
   background-color: #f5f5f5;
-}
-
-.pageSizeForm-label {
-  font-size: 14px;
-  line-height: 1.5;
-  color: #333;
 }

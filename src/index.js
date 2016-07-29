@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import IssuesBox from './IssuesBox';
+import App from './App';
 import './index.css';
 
 ReactDOM.render(
-  <IssuesBox />,
+  <App />,
   document.getElementById('root')
 );

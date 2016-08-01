@@ -1,9 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import IssuesBox from './IssuesBox';
+import IssuePage from './IssuePage';
 import App from './App';
 import './index.css';
 
+import { Router, Route, browserHistory, IndexRoute } from 'react-router';
+
 ReactDOM.render(
-  <App />,
+  <Router history={browserHistory}>
+    <Route path="/" component={App}>
+      <IndexRoute component={IssuesBox}/>
+      <Route path="/:userName/:repoName/issues/:issueId" component={IssuePage}/>
+    </Route>
+  </Router>
+  ,
   document.getElementById('root')
 );

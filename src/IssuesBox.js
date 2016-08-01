@@ -38,47 +38,36 @@ export default class IssuesBox extends Component {
     if (this.state.repoAuthor === '' || this.state.repoName === '') {
       return;
     }
-    let httpRequest = new XMLHttpRequest();
-    httpRequest.onreadystatechange = () => {
-      if (httpRequest.readyState === 4) {
-        if (httpRequest.status === 200) {
-          const response = JSON.parse(httpRequest.responseText);
-          this.setState({ data: response, loaded: true });
-        } else {
-          this.msg.error(httpRequest.statusText, {
-            time: 2000,
-            type: 'error',
-          });
-        }
-      }
-    }
-    const url = `${this.baseUrl}/${this.state.repoAuthor}/${this.state.repoName}/issues?page=${this.state.currentPage}&per_page=${this.state.pageSize}`
-    httpRequest.open('GET', url, true);
-    httpRequest.send();
+
+    fetch(`${this.baseUrl}/${this.state.repoAuthor}/${this.state.repoName}/issues?page=${this.state.currentPage}&per_page=${this.state.pageSize}`)
+      .then( response => response.json() )
+      .then( json => {
+        this.setState({ data: json, loaded: true });
+      })
+      .catch(ex => {
+        this.msg.error(ex, {
+          time: 2000,
+          type: 'error',
+        });
+      });
   };
 
   loadTotalIssuesFromServer = () => {
     if (this.state.repoAuthor === '' || this.state.repoName === '') {
       return;
     }
-    let httpRequest = new XMLHttpRequest();
-    httpRequest.onreadystatechange = () => {
-      if (httpRequest.readyState === 4) {
-        if (httpRequest.status === 200) {
-          const response = JSON.parse(httpRequest.responseText);
-          this.setState({ open_issues_count: response.open_issues_count });
-        } else {
-          this.msg.error(httpRequest.statusText, {
-            time: 2000,
-            type: 'error',
-          });
-        }
-      }
-    };
 
-    const url = `${this.baseUrl}/${this.state.repoAuthor}/${this.state.repoName}`
-    httpRequest.open('GET', url, true);
-    httpRequest.send();
+    fetch(`${this.baseUrl}/${this.state.repoAuthor}/${this.state.repoName}`)
+      .then( response => response.json() )
+      .then( json => {
+        this.setState({ open_issues_count: json.open_issues_count });
+      })
+      .catch(ex => {
+        this.msg.error(ex, {
+          time: 2000,
+          type: 'error',
+        });
+      });
   }
 
   handleRepositorySubmit = repository => {

@@ -14,21 +14,16 @@ export default class IssuePage extends Component {
   }
 
   loadIssueFromServer() {
-    const httpRequest = new XMLHttpRequest();
-    httpRequest.onreadystatechange = () => {
-      if (httpRequest.readyState === 4) {
-        if (httpRequest.status === 200) {
-          const response = JSON.parse(httpRequest.responseText);
-          // todo add loader
-          this.setState({ data: response, user: response.user });
-        } else {
-          // todo add error message
-        }
-      }
-    };
-    const url = `https://api.github.com/repos/${this.props.params.repoAuthor}/${this.props.params.repoName}/issues/${this.props.params.issueId}`
-    httpRequest.open('GET', url, true);
-    httpRequest.send();
+    fetch(`https://api.github.com/repos/${this.props.params.repoAuthor}/${this.props.params.repoName}/issues/${this.props.params.issueId}`)
+      .then( response => response.json() )
+      .then( json => {
+        // todo add loader
+        this.setState({ data: json, user: json.user });
+      })
+      .catch(ex => {
+        // todo add error message
+        console.log('parsing failed', ex)
+      });
   }
 
   componentDidMount() {

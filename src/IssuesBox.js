@@ -127,7 +127,7 @@ export default class IssuesBox extends Component {
             data={this.state.data}
             open_issues_count={this.state.open_issues_count}
             repoAuthor={this.state.repoAuthor}
-            repoName={this.state.repositoryName}
+            repoName={this.state.repoName}
           />
         </Loader>
         <div className="container">

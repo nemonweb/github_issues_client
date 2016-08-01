@@ -11,7 +11,7 @@ ReactDOM.render(
   <Router history={browserHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={IssuesBox}/>
-      <Route path="/:userName/:repoName/issues/:issueId" component={IssuePage}/>
+      <Route path="/:repoAuthor/:repoName/issues/:issueId" component={IssuePage}/>
     </Route>
   </Router>
   ,

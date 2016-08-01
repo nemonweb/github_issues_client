@@ -8,10 +8,7 @@ export default class IssuesList extends Component {
       return (
         <IssueItem
           key={issue.id}
-          number={issue.number}
-          title={issue.title}
-          created_at={issue.created_at}
-          html_url={issue.html_url}
+          issueData={issue}
           repoAuthor={this.props.repoAuthor}
           repoName={this.props.repoName}
         />

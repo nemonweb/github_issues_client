@@ -9,13 +9,13 @@ export default class IssueItem extends Component {
 
     return (
       <div className='issue-item'>
-        <a className='issue-item__title' href={this.props.html_url}>
-          {this.props.title}
+        <a className='issue-item__title' href={this.props.issueData.html_url}>
+          {this.props.issueData.title}
         </a>
         <div className='issue-item__info'>
-          #{this.props.number} openned {moment(this.props.created_at).fromNow()}
+          #{this.props.number} openned {moment(this.props.issueData.created_at).fromNow()}
         </div>
-        <Link to={`/${this.props.repoAuthor}/${this.props.repoName}/issues/${this.props.number}`}>
+        <Link to={`/${this.props.repoAuthor}/${this.props.repoName}/issues/${this.props.issueData.number}`}>
           Подробнее
         </Link>
       </div>

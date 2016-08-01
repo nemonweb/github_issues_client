@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Issue from './Issue';
+import IssueItem from './IssueItem';
 import './IssuesList.css';
 
 export default class IssuesList extends Component {
   render() {
     const issueNodes = this.props.data.map( issue => {
       return (
-        <Issue
+        <IssueItem
           key={issue.id}
           number={issue.number}
           title={issue.title}

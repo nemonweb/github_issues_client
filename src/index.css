@@ -12,3 +12,13 @@ body {
   margin-right: auto;
   margin-left: auto;
 }
+
+.link {
+  color: #555;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}

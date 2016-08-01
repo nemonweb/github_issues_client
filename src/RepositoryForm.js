@@ -7,7 +7,7 @@ export default class RepositoryForm extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = { author: '', repository: '', repos: [] }
+    this.state = { author: 'facebook', repository: 'android-jsc ', repos: [] }
 
 
     this.alertOptions = {

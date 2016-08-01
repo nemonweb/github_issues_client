@@ -2,6 +2,7 @@
   padding: 12px;
   line-height: 1.25;
   border-top: 1px solid #eee;
+  display: flex;
 }
 
 .issue-item:hover {
@@ -9,11 +10,8 @@
 }
 
 .issue-item__title {
-  color: #333;
   word-break: break-word;
   font-size: 16px;
-  text-decoration: none;
-  font-weight: 600;
 }
 
 .issue-item__title:hover {
@@ -25,4 +23,28 @@
   line-height: 1.25;
   font-size: 12px;
   margin-top: 3px;
+}
+
+.issue-item__avatar{
+  width: 48px;
+  height: 48px;
+  border-radius: 3px;
+}
+
+.issue-item__left {
+  text-align: center;
+  width: 10%;
+}
+
+.issue-item__right {
+  max-width: 830px;
+}
+
+
+.issue-item__header {
+  padding: 10px;
+}
+
+.issue-item__body {
+  padding: 10px;
 }

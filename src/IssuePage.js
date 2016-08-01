@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import './IssueItem.css';
+import './IssuePage.css';
 import { IndexLink } from 'react-router';
 
 export default class IssuePage extends Component {
@@ -8,7 +8,8 @@ export default class IssuePage extends Component {
     super(props, context);
 
     this.state = {
-      data: []
+      data: {},
+      user: {}
     };
   }
 
@@ -19,7 +20,7 @@ export default class IssuePage extends Component {
         if (httpRequest.status === 200) {
           const response = JSON.parse(httpRequest.responseText);
           // todo add loader
-          this.setState({ data: response });
+          this.setState({ data: response, user: response.user });
         } else {
           // todo add error message
         }
@@ -36,25 +37,36 @@ export default class IssuePage extends Component {
 
   render() {
     return (
-      <div>
-        <div className='issue-item'>
-          <a className='issue-item__title' href={this.state.data.html_url}>
-            {this.state.data.title}
-          </a>
-          <div className='issue-item__info'>
-            #{this.state.data.number} openned {moment(this.state.data.created_at).fromNow()}
+      <div className='container'>
+        <div className='issue-page'>
+          <div className='issue-page__left'>
+            <a className='link' href={this.state.user.html_url}>
+              <img className='issue-page__avatar' src={this.state.user.avatar_url} role='presentation' />
+              <div>{this.state.user.login}</div>
+            </a>
           </div>
+          <div className='issue-page__right'>
+            <div className='issue-page__header'>
+              <a className='link issue-page__title' href={this.state.data.html_url}>
+                {this.state.data.title}
+              </a>
+              <div className='issue-page__info'>
+                #{this.state.data.number} openned {moment(this.state.data.created_at).fromNow()}
+              </div>
+            </div>
+            <div className='issue-page__body'>
+              <div>
+                status: {this.state.data.state}
+              </div>
 
-          <div>
-            status: {this.state.data.state}
-          </div>
+              <div>
+                comments: {this.state.data.comments}
+              </div>
 
-          <div>
-            comments: {this.state.data.comments}
-          </div>
-
-          <div>
-            {this.state.data.body}
+              <div>
+                {this.state.data.body}
+              </div>
+            </div>
           </div>
         </div>
         <IndexLink to="/">go to Home</IndexLink>

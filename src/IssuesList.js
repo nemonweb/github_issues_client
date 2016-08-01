@@ -11,7 +11,7 @@ export default class IssuesList extends Component {
           number={issue.number}
           title={issue.title}
           created_at={issue.created_at}
-          url={issue.url}
+          html_url={issue.html_url}
           author={this.props.author}
           repository={this.props.repository}
         />

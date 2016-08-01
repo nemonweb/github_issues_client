@@ -9,7 +9,7 @@ export default class IssueItem extends Component {
 
     return (
       <div className='issue-item'>
-        <a className='issue-item__title' href={this.props.url}>
+        <a className='issue-item__title' href={this.props.html_url}>
           {this.props.title}
         </a>
         <div className='issue-item__info'>

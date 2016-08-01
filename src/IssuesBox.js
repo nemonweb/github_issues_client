@@ -19,8 +19,8 @@ export default class IssuesBox extends Component {
       currentPage: 1,
       pageSize: 10,
       open_issues_count: 0,
-      repositoryAuthor: '',
-      repositoryName: ''
+      repoAuthor: '',
+      repoName: ''
     }
 
     this.alertOptions = {
@@ -35,7 +35,7 @@ export default class IssuesBox extends Component {
   baseUrl = 'https://api.github.com/repos';
 
   loadIssuesFromServer = () => {
-    if (this.state.repositoryAuthor === '' || this.state.repositoryName === '') {
+    if (this.state.repoAuthor === '' || this.state.repoName === '') {
       return;
     }
     let httpRequest = new XMLHttpRequest();
@@ -52,13 +52,13 @@ export default class IssuesBox extends Component {
         }
       }
     }
-    const url = `${this.baseUrl}/${this.state.repositoryAuthor}/${this.state.repositoryName}/issues?page=${this.state.currentPage}&per_page=${this.state.pageSize}`
+    const url = `${this.baseUrl}/${this.state.repoAuthor}/${this.state.repoName}/issues?page=${this.state.currentPage}&per_page=${this.state.pageSize}`
     httpRequest.open('GET', url, true);
     httpRequest.send();
   };
 
   loadTotalIssuesFromServer = () => {
-    if (this.state.repositoryAuthor === '' || this.state.repositoryName === '') {
+    if (this.state.repoAuthor === '' || this.state.repoName === '') {
       return;
     }
     let httpRequest = new XMLHttpRequest();
@@ -76,13 +76,13 @@ export default class IssuesBox extends Component {
       }
     };
 
-    const url = `${this.baseUrl}/${this.state.repositoryAuthor}/${this.state.repositoryName}`
+    const url = `${this.baseUrl}/${this.state.repoAuthor}/${this.state.repoName}`
     httpRequest.open('GET', url, true);
     httpRequest.send();
   }
 
   handleRepositorySubmit = repository => {
-    this.setState({ repositoryAuthor: repository.author, repositoryName: repository.repository, loaded: false }, () => {
+    this.setState({ repoAuthor: repository.author, repoName: repository.repository, loaded: false }, () => {
       this.loadIssuesFromServer();
       this.loadTotalIssuesFromServer();
     });
@@ -118,10 +118,17 @@ export default class IssuesBox extends Component {
         <AlertContainer ref={a => { this.msg = a; return a; } } {...this.alertOptions} />
 
         <RepositoryForm onRepositorySubmit={this.handleRepositorySubmit}/>
-        <RepositoryName author={this.state.repositoryAuthor} repository={this.state.repositoryName} />
+
+        <RepositoryName repoAuthor={this.state.repoAuthor} repoName={this.state.repoName} />
+
         <PageSize open_issues_count={this.state.open_issues_count} onPageSizeSubmit={this.handlePageSizeSubmit}/>
         <Loader loaded={this.state.loaded}>
-          <IssuesList data={this.state.data} open_issues_count={this.state.open_issues_count} author={this.state.repositoryAuthor} repository={this.state.repositoryName} />
+          <IssuesList
+            data={this.state.data}
+            open_issues_count={this.state.open_issues_count}
+            repoAuthor={this.state.repoAuthor}
+            repoName={this.state.repositoryName}
+          />
         </Loader>
         <div className="container">
           { pagination }

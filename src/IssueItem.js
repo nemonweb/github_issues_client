@@ -15,7 +15,7 @@ export default class IssueItem extends Component {
         <div className='issue-item__info'>
           #{this.props.number} openned {moment(this.props.created_at).fromNow()}
         </div>
-        <Link to={`/${this.props.author}/${this.props.repository}/issues/${this.props.number}`}>
+        <Link to={`/${this.props.repoAuthor}/${this.props.repoName}/issues/${this.props.number}`}>
           Подробнее
         </Link>
       </div>

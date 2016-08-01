@@ -3,10 +3,10 @@ import './RepositoryName.css';
 
 export default class RepositoryName extends Component {
   repositoryUrl() {
-    return `https://github.com/${this.props.author}/${this.props.repository}`;
+    return `https://github.com/${this.props.repoAuthor}/${this.props.repoName}`;
   }
   authorUrl() {
-    return `https://github.com/${this.props.author}`;
+    return `https://github.com/${this.props.repoAuthor}`;
   }
   render() {
     if (this.props.author) {

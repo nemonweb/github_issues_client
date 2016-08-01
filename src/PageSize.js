@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './PageSize.sss';
+import styles from './PageSize.sss';
 
 export default class PageSize extends Component {
   constructor(props, context) {
@@ -26,17 +26,17 @@ export default class PageSize extends Component {
   render() {
     if(this.props.open_issues_count > 0) {
       return (
-        <div className='page-size-form'>
+        <div className={styles.root}>
           <div className="container">
             <form onSubmit={this.handleSubmit}>
-              <label className="page-size-form__label">Кол-во issues на странице</label>
+              <label>Кол-во issues на странице</label>
               <div>
                 <input type='number' placeholder='Кол-во issues на странице'
-                  className="page-size-form__input"
+                  className={styles.input}
                   value={this.state.pageSize}
                   onChange={this.handlePageSizeChange}
                   />
-                <input type="submit" value="Save" className="page-size-form__save" />
+                <input type="submit" value="Save" className={styles.save} />
               </div>
             </form>
           </div>

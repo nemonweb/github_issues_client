@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import IssueItem from './IssueItem';
-import './IssuesList.sss';
+import styles from './IssuesList.sss';
 
 export default class IssuesList extends Component {
   render() {
@@ -17,15 +17,15 @@ export default class IssuesList extends Component {
 
     if (issueNodes.length > 0) {
       return (
-        <div className="issues-list">
+        <div>
           <div className="container">
-            <div className="issues-list__header">
-              <span className="issues-list__issues-count">
+            <div className={styles.header}>
+              <span className={styles.issuesCount}>
                 {this.props.open_issues_count} Open
               </span>
             </div>
 
-            <div className="issues-list__nodes">
+            <div className={styles.nodes}>
               {issueNodes}
             </div>
           </div>

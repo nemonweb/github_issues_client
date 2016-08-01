@@ -63,7 +63,7 @@ module.exports = {
       {
         test:   /\.sss/,
         include: [paths.appSrc, paths.appNodeModules],
-        loader: 'style!css!postcss?parser=sugarss'
+        loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]!postcss?parser=sugarss'
       },
       {
         test: /\.json$/,

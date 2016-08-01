@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './RepositoryForm.sss';
+import styles from './RepositoryForm.sss';
 import Autocomplete from 'react-autocomplete';
 import AlertContainer from 'react-alert';
 
@@ -74,21 +74,21 @@ export default class RepositoryForm extends Component {
 
   render() {
     return (
-      <div className='repository-form'>
+      <div className={styles.root}>
       <AlertContainer ref={a => { this.msg = a; return a; } } {...this.alertOptions} />
         <div className="container">
 
           <form onSubmit={this.handleSubmit}>
-            <span className='repository-form__label'>Issues</span>
+            <span className={styles.label}>Issues</span>
             <input type='text' placeholder='User name'
-              className="repository-form__input repository-form__input_left"
+              className={styles.inputLeft}
               value={this.state.author}
               onChange={this.handleAuthorChange}
               onBlur={this.handleReposAuthorOnBlur}
               />
             <Autocomplete
               value={this.state.repository}
-              inputProps={{ placeholder: "Repository name", id: "repos-autocomplete", className: 'repository-form__input repository-form__input_right' }}
+              inputProps={{ placeholder: "Repository name", id: "repos-autocomplete", className: styles.inputRight }}
               items={this.state.repos}
               getItemValue={(item) => item.name}
               shouldItemRender={this.matchReposToTerm}
@@ -97,7 +97,7 @@ export default class RepositoryForm extends Component {
               onSelect={this.handleAutocompleteSelect}
               renderItem={(item, isHighlighted) => (
                 <div
-                  className={isHighlighted ? 'repository-form__highlighted-item' : 'repository-form__autocomplete-item' }
+                  className={isHighlighted ? styles.highlightedItem : styles.autocompleteItem }
                   key={item.id}
                 >{item.name}</div>
               ) }

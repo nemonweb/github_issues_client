@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './RepositoryName.sss';
+import styles from './RepositoryName.sss';
 
 export default class RepositoryName extends Component {
   repositoryUrl() {
@@ -9,18 +9,18 @@ export default class RepositoryName extends Component {
     return `https://github.com/${this.props.repoAuthor}`;
   }
   render() {
-    if (this.props.author) {
+    if (this.props.repoAuthor) {
       return (
-        <div className="repository_name">
+        <div className={styles.root}>
           <div className="container">
-            <a className="repository_name__text" href={this.authorUrl()}>
-              {this.props.author}
+            <a className={styles.text} href={this.authorUrl()}>
+              {this.props.repoAuthor}
             </a>
 
-            <span className="repository_name__divider">/</span>
+            <span className={styles.divider}>/</span>
 
-            <a className="repository_name__text" href={this.repositoryUrl()}>
-              {this.props.repository}
+            <a className={styles.text} href={this.repositoryUrl()}>
+              {this.props.repoName}
             </a>
           </div>
         </div>

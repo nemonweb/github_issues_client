@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import './IssuePage.sss';
+import styles from './IssuePage.sss';
 import { IndexLink } from 'react-router';
 import Loader from 'react-loader';
 import AlertContainer from 'react-alert';
@@ -50,23 +50,23 @@ export default class IssuePage extends Component {
         <AlertContainer ref={a => { this.msg = a; return a; } } {...this.alertOptions} />
         <Loader loaded={this.state.loaded}>
           <div className='container'>
-            <div className='issue-page'>
-              <div className='issue-page__left'>
+            <div className={styles.root}>
+              <div className={styles.left}>
                 <a className='link' href={this.state.user.html_url}>
-                  <img className='issue-page__avatar' src={this.state.user.avatar_url} role='presentation' />
+                  <img className={styles.avatar} src={this.state.user.avatar_url} role='presentation' />
                   <div>{this.state.user.login}</div>
                 </a>
               </div>
-              <div className='issue-page__right'>
-                <div className='issue-page__header'>
-                  <a className='link issue-page__title' href={this.state.data.html_url}>
+              <div className={styles.right}>
+                <div className={styles.header}>
+                  <a className={ ['link', styles.title].join(' ') } href={this.state.data.html_url}>
                     {this.state.data.title}
                   </a>
-                  <div className='issue-page__info'>
+                  <div className={styles.info}>
                     #{this.state.data.number} openned {moment(this.state.data.created_at).fromNow()}
                   </div>
                 </div>
-                <div className='issue-page__body'>
+                <div className={styles.body}>
                   <div>
                     status: {this.state.data.state}
                   </div>

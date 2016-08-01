@@ -69,7 +69,7 @@ export default class IssuePage extends Component {
             </div>
           </div>
         </div>
-        <IndexLink to="/">go to Home</IndexLink>
+        <IndexLink to="/" className='link'>go to Home</IndexLink>
       </div>
     );
   }

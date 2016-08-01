@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import { Link } from 'react-router';
+
 import './issue.css';
 
 export default class Issue extends Component {
@@ -13,6 +15,9 @@ export default class Issue extends Component {
         <div className='issue__info'>
           #{this.props.number} openned {moment(this.props.created_at).fromNow()}
         </div>
+        <Link to={`/${this.props.author}/${this.props.repository}/issues/${this.props.number}`}>
+          Подробнее
+        </Link>
       </div>
     );
   }

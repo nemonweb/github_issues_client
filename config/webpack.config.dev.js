@@ -3,6 +3,7 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var paths = require('./paths');
 
+var StyleLintPlugin = require('stylelint-webpack-plugin');
 // var autoprefixer = require('autoprefixer');
 var cssnext = require('postcss-cssnext');
 
@@ -96,6 +97,13 @@ module.exports = {
     }),
     new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"development"' }),
     // Note: only CSS is currently hot reloaded
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+
+    new StyleLintPlugin({
+      configFile: path.join(__dirname, 'stylelint.config.js'),
+      files: './src/**/*.sss',
+      failOnError: false,
+      syntax: 'sugarss'
+    })
   ]
 };

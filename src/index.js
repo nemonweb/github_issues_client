@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import IssuesBox from './IssuesBox';
 import IssuePage from './IssuePage';
 import App from './App';
-import './index.css';
+import './index.sss';
 
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import './IssuePage.css';
+import './IssuePage.sss';
 import { IndexLink } from 'react-router';
 import Loader from 'react-loader';
 import AlertContainer from 'react-alert';

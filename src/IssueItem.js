@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { Link } from 'react-router';
 
-import './IssueItem.css';
+import './IssueItem.sss';
 
 export default class IssueItem extends Component {
   render() {

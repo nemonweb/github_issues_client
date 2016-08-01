@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import IssueItem from './IssueItem';
-import './IssuesList.css';
+import './IssuesList.sss';
 
 export default class IssuesList extends Component {
   render() {

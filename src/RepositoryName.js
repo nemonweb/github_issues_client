@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './RepositoryName.css';
+import './RepositoryName.sss';
 
 export default class RepositoryName extends Component {
   repositoryUrl() {

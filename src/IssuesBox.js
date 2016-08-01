@@ -6,7 +6,6 @@ import PageSize from './PageSize';
 import Loader from 'react-loader';
 import Pagination from 'rc-pagination';
 import './pagination.css';
-import './index.css';
 import AlertContainer from 'react-alert';
 import checkStatus from './common/checkStatus';
 

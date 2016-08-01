@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './PageSize.css';
+import './PageSize.sss';
 
 export default class PageSize extends Component {
   constructor(props, context) {

@@ -1,8 +1,10 @@
 var path = require('path');
-var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var paths = require('./paths');
+
+// var autoprefixer = require('autoprefixer');
+var cssnext = require('postcss-cssnext');
 
 module.exports = {
   devtool: 'eval',
@@ -58,6 +60,11 @@ module.exports = {
         loader: 'style!css!postcss'
       },
       {
+        test:   /\.sss/,
+        include: [paths.appSrc, paths.appNodeModules],
+        loader: 'style!css!postcss?parser=sugarss'
+      },
+      {
         test: /\.json$/,
         include: [paths.appSrc, paths.appNodeModules],
         loader: 'json'
@@ -79,7 +86,7 @@ module.exports = {
     useEslintrc: false
   },
   postcss: function() {
-    return [autoprefixer];
+    return [cssnext];
   },
   plugins: [
     new HtmlWebpackPlugin({

@@ -8,6 +8,8 @@ import Pagination from 'rc-pagination';
 import './pagination.css';
 import './index.css';
 import AlertContainer from 'react-alert';
+import checkStatus from './common/checkStatus';
+
 
 export default class IssuesBox extends Component {
   constructor(props, context) {
@@ -40,12 +42,12 @@ export default class IssuesBox extends Component {
     }
 
     fetch(`${this.baseUrl}/${this.state.repoAuthor}/${this.state.repoName}/issues?page=${this.state.currentPage}&per_page=${this.state.pageSize}`)
-      .then( response => response.json() )
+      .then( checkStatus )
       .then( json => {
         this.setState({ data: json, loaded: true });
       })
-      .catch(ex => {
-        this.msg.error(ex, {
+      .catch( error => {
+        this.msg.error(error.response.statusText, {
           time: 2000,
           type: 'error',
         });
@@ -58,12 +60,12 @@ export default class IssuesBox extends Component {
     }
 
     fetch(`${this.baseUrl}/${this.state.repoAuthor}/${this.state.repoName}`)
-      .then( response => response.json() )
+      .then( checkStatus )
       .then( json => {
         this.setState({ open_issues_count: json.open_issues_count });
       })
-      .catch(ex => {
-        this.msg.error(ex, {
+      .catch( error => {
+        this.msg.error(error.response.statusText, {
           time: 2000,
           type: 'error',
         });

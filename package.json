@@ -4,6 +4,7 @@
   "private": true,
   "devDependencies": {
     "autoprefixer": "6.3.7",
+    "ava": "^0.15.2",
     "babel-core": "6.11.4",
     "babel-eslint": "6.1.2",
     "babel-loader": "6.2.4",
@@ -37,6 +38,7 @@
     "postcss-cssnext": "^2.7.0",
     "postcss-loader": "0.9.1",
     "promise": "7.1.1",
+    "react-addons-test-utils": "^15.3.0",
     "rimraf": "2.5.4",
     "style-loader": "0.13.1",
     "stylelint": "^7.0.3",
@@ -61,12 +63,24 @@
   },
   "scripts": {
     "start": "node ./scripts/start.js",
-    "build": "node ./scripts/build.js"
+    "build": "node ./scripts/build.js",
+    "test": "ava",
+    "watch:test": "npm run test -- --watch"
   },
   "eslintConfig": {
     "extends": "./config/eslint.js"
   },
   "stylelint": {
     "extends": "./config/stylelint.config.js"
-  }
+  },
+  "files": [
+    "./src/*.test.js"
+  ],
+  "concurrency": 5,
+  "failFast": true,
+  "tap": true,
+  "require": [
+    "babel-register"
+  ],
+  "babel": "inherit"
 }
